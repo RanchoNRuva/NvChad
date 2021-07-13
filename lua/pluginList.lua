@@ -8,6 +8,13 @@ return packer.startup(
         use "akinsho/nvim-bufferline.lua"
         use "glepnir/galaxyline.nvim"
 
+        use {'kristijanhusak/orgmode.nvim', config = function()
+            require('orgmode').setup{}
+        end
+        }
+        use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+    
+
         -- color related stuff
         use "siduck76/nvim-base16.lua"
 

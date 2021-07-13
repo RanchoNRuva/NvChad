@@ -10,9 +10,7 @@ g.auto_save = 0
 
 -- colorscheme related stuff
 
-g.nvchad_theme = "onedark"
 local base16 = require "base16"
-base16(base16.themes["onedark"], true)
 
 require "highlights"
 require "mappings"
@@ -28,3 +26,11 @@ vim.api.nvim_exec(
 ]],
     false
 )
+
+require('orgmode').setup({
+    org_agenda_files = {'~/OneDrive/Desktop/org/agenda/*'},
+    org_default_notes_file = '~/OneDrive/Desktop/org/notes.org',
+})  
+local neogit = require('neogit')
+
+neogit.setup {}
