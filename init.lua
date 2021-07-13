@@ -1,12 +1,12 @@
 -- load all plugins
 require "pluginList"
-require "misc-utils"
-require "top-bufferline"
+require "options"
+require "plugins.bufferline"
 
 local g = vim.g
 
 g.mapleader = " "
-g.auto_save = 0
+g.auto_save = false
 
 -- colorscheme related stuff
 
@@ -16,8 +16,6 @@ base16(base16.themes["nvchad-softgruv"], true)
 
 require "highlights"
 require "mappings"
-require "file-icons"
-require "statusline"
 
 -- hide line numbers , statusline in specific buffers!
 vim.api.nvim_exec(
@@ -40,3 +38,4 @@ neogit.setup {}
 --require'lspconfig'.html.setup{}
 --require'lspconfig'.cssls.setup{}
 --require'lspconfig'.jsonls.setup{}
+require("utils").hideStuff()

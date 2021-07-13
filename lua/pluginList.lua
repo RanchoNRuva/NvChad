@@ -1,12 +1,29 @@
 local packer = require("packer")
 local use = packer.use
 
+packer.init {
+    display = {
+        open_fn = function()
+            return require("packer.util").float {border = "single"}
+        end
+    },
+    git = {
+        clone_timeout = 600 -- Timeout, in seconds, for git clones
+    }
+}
+
 return packer.startup(
     function()
         use "wbthomason/packer.nvim"
 
         use "akinsho/nvim-bufferline.lua"
-        use "glepnir/galaxyline.nvim"
+
+        use {
+            "glepnir/galaxyline.nvim",
+            config = function()
+                require("plugins.statusline").config()
+            end
+        }
 
         use {'kristijanhusak/orgmode.nvim', config = function()
             require('orgmode').setup{}
@@ -32,19 +49,22 @@ return packer.startup(
             "nvim-treesitter/nvim-treesitter",
             event = "BufRead",
             config = function()
-                require("treesitter-nvim").config()
+                require("plugins.treesitter").config()
             end
         }
 
         use {
-            "neovim/nvim-lspconfig",
-            event = "BufRead",
-            config = function()
-                require("nvim-lspconfig").config()
-            end
+            "kabouzeid/nvim-lspinstall",
+            event = "BufRead"
         }
 
-        use "kabouzeid/nvim-lspinstall"
+        use {
+            "neovim/nvim-lspconfig",
+            after = "nvim-lspinstall",
+            config = function()
+                require("plugins.lspconfig").config()
+            end
+        }
 
         use {
             "onsails/lspkind-nvim",
@@ -59,7 +79,7 @@ return packer.startup(
             "hrsh7th/nvim-compe",
             event = "InsertEnter",
             config = function()
-                require("compe-completion").config()
+                require("plugins.compe").config()
             end,
             wants = {"LuaSnip"},
             requires = {
@@ -68,10 +88,13 @@ return packer.startup(
                     wants = "friendly-snippets",
                     event = "InsertCharPre",
                     config = function()
-                        require("compe-completion").snippets()
+                        require("plugins.compe").snippets()
                     end
                 },
-                "rafamadriz/friendly-snippets"
+                {
+                    "rafamadriz/friendly-snippets",
+                    event = "InsertCharPre"
+                }
             }
         }
 
@@ -82,23 +105,34 @@ return packer.startup(
             "kyazdani42/nvim-tree.lua",
             cmd = "NvimTreeToggle",
             config = function()
-                require("nvimTree").config()
+                require("plugins.nvimtree").config()
             end
         }
 
-        use "kyazdani42/nvim-web-devicons"
+        use {
+            "kyazdani42/nvim-web-devicons",
+            config = function()
+                require("plugins.icons").config()
+            end
+        }
+
         use {
             "nvim-telescope/telescope.nvim",
             requires = {
                 {"nvim-lua/popup.nvim"},
-                {"nvim-lua/plenary.nvim"},
-                {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
-                {"nvim-telescope/telescope-media-files.nvim"}
+                {"nvim-lua/plenary.nvim"}
             },
             cmd = "Telescope",
             config = function()
-                require("telescope-nvim").config()
+                require("plugins.telescope").config()
             end
+        }
+
+        use {"nvim-telescope/telescope-fzf-native.nvim", run = "make", cmd = "Telescope"}
+
+        use {
+            "nvim-telescope/telescope-media-files.nvim",
+            cmd = "Telescope"
         }
 
         -- git stuff
@@ -106,16 +140,22 @@ return packer.startup(
             "lewis6991/gitsigns.nvim",
             event = "BufRead",
             config = function()
-                require("gitsigns-nvim").config()
+                require("plugins.gitsigns").config()
             end
         }
 
         -- misc plugins
         use {
             "windwp/nvim-autopairs",
-            event = "InsertEnter",
+            after = "nvim-compe",
             config = function()
                 require("nvim-autopairs").setup()
+                require("nvim-autopairs.completion.compe").setup(
+                    {
+                        map_cr = true,
+                        map_complete = true -- insert () func completion
+                    }
+                )
             end
         }
 
@@ -139,7 +179,7 @@ return packer.startup(
                 "SessionSave"
             },
             setup = function()
-                require("dashboard").config()
+                require("plugins.dashboard").config()
             end
         }
 
@@ -147,9 +187,12 @@ return packer.startup(
 
         -- load autosave only if its globally enabled
         use {
-            "907th/vim-auto-save",
+            "Pocco81/AutoSave.nvim",
+            config = function()
+                require("plugins.zenmode").autoSave()
+            end,
             cond = function()
-                return vim.g.auto_save == 1
+                return vim.g.auto_save == true
             end
         }
 
@@ -164,9 +207,9 @@ return packer.startup(
 
         use {
             "Pocco81/TrueZen.nvim",
-            cmd = {"TZAtaraxis", "TZMinimalist"},
+            cmd = {"TZAtaraxis", "TZMinimalist", "TZFocus"},
             config = function()
-                require("zenmode").config()
+                require("plugins.zenmode").config()
             end
         }
 
@@ -174,16 +217,10 @@ return packer.startup(
 
         use {
             "lukas-reineke/indent-blankline.nvim",
-            branch = "lua",
             event = "BufRead",
             setup = function()
-                require("misc-utils").blankline()
+                require("utils").blankline()
             end
         }
-    end,
-    {
-        display = {
-            border = {"┌", "─", "┐", "│", "┘", "─", "└", "│"}
-        }
-    }
+    end
 )

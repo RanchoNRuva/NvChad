@@ -30,8 +30,9 @@ map("n", "<C-a>", [[ <Cmd> %y+<CR>]], opt)
 map("n", "<leader>n", [[ <Cmd> set nu!<CR>]], opt)
 
 -- Truezen.nvim
-map("n", "<leader>z", ":TZAtaraxis<CR>", opt)
-map("n", "<leader>m", ":TZMinimalist<CR>", opt)
+map("n", "<leader>zz", ":TZAtaraxis<CR>", opt)
+map("n", "<leader>zm", ":TZMinimalist<CR>", opt)
+map("n", "<leader>zf", ":TZFocus<CR>", opt)
 
 map("n", "<C-s>", ":w <CR>", opt)
 -- vim.cmd("inoremap jh <Esc>")
@@ -40,10 +41,7 @@ map("n", "<C-s>", ":w <CR>", opt)
 map("n", "<leader>/", ":CommentToggle<CR>", opt)
 map("v", "<leader>/", ":CommentToggle<CR>", opt)
 
-map("n", "<C-q>", ":bp<bar>sp<bar>bn<bar>bd! <CR>", opt)
-
 -- compe stuff
-
 local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
