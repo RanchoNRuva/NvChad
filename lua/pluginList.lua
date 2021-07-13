@@ -25,6 +25,8 @@ return packer.startup(
             end
         }
 
+        -- orgmode and neogit
+
         use {'kristijanhusak/orgmode.nvim', config = function()
             require('orgmode').setup{}
         end
