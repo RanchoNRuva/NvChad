@@ -17,15 +17,7 @@ base16(base16.themes["nvchad-softgruv"], true)
 require "highlights"
 require "mappings"
 
--- hide line numbers , statusline in specific buffers!
-vim.api.nvim_exec(
-    [[
-   au BufEnter term://* setlocal nonumber
-   au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree" | set laststatus=0 | else | set laststatus=2 | endif
-   au BufEnter term://* set laststatus=0 
-]],
-    false
-)
+require("utils").hideStuff()
 
 require('orgmode').setup({
     org_agenda_files = {'~/OneDrive/Desktop/org/agenda/*'},
@@ -38,4 +30,4 @@ neogit.setup {}
 --require'lspconfig'.html.setup{}
 --require'lspconfig'.cssls.setup{}
 --require'lspconfig'.jsonls.setup{}
-require("utils").hideStuff()
+
