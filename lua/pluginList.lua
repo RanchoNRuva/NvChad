@@ -18,13 +18,7 @@ return packer.startup(
 
         use "akinsho/nvim-bufferline.lua"
 
-        use {
-            "glepnir/galaxyline.nvim",
-            config = function()
-                require("plugins.statusline").config()
-            end
-        }
-
+        use 'famiu/feline.nvim'
         -- orgmode and neogit
 
         use {'kristijanhusak/orgmode.nvim', config = function()

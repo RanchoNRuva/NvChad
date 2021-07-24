@@ -10,9 +10,9 @@ g.auto_save = false
 
 -- colorscheme related stuff
 
-g.nvchad_theme = "gruvbox"
+g.nvchad_theme = "onedark"
 local base16 = require "base16"
-base16(base16.themes["nvchad-softgruv"], true)
+base16(base16.themes["onedark"], true)
 
 require "highlights"
 require "mappings"
@@ -26,8 +26,10 @@ require('orgmode').setup({
 local neogit = require('neogit')
 
 neogit.setup {}
---require'lspconfig'.tsserver.setup{}
---require'lspconfig'.html.setup{}
---require'lspconfig'.cssls.setup{}
---require'lspconfig'.jsonls.setup{}
 
+local lspConf = require'lspconfig'
+lspconf.tsserver.setup{}
+lspconf.html.setup{}
+lspconf.cssls.setup{}
+lspconf.jsonls.setup{}
+require('feline').setup()
