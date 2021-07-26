@@ -32,4 +32,6 @@ lspconf.tsserver.setup{}
 lspconf.html.setup{}
 lspconf.cssls.setup{}
 lspconf.jsonls.setup{}
-require('feline').setup()
+require'lualine'.setup{
+  options = { theme  = onedark }
+}

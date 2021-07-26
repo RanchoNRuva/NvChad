@@ -18,7 +18,11 @@ return packer.startup(
 
         use "akinsho/nvim-bufferline.lua"
 
-        use 'famiu/feline.nvim'
+        use {
+          'hoob3rt/lualine.nvim',
+          requires = {'kyazdani42/nvim-web-devicons', opt = true}
+        }
+
         -- orgmode and neogit
 
         use {'kristijanhusak/orgmode.nvim', config = function()
