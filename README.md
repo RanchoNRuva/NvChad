@@ -100,7 +100,7 @@ without / with Treesitter :
 
 - File navigation with Nvimtree
 - Using plugins that are mouse friendly
-- sexy themes
+- beautiful themes
 - managing tabs , buffers with bufferline
 - autosave
 - icons on nvimtree , telescope , bufferline/statusline and almost everywhere! with nvim-web-devicons
