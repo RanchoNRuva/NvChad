@@ -98,16 +98,16 @@ without / with Treesitter :
 
 # Features
 
-- File navigation with Nvimtree
+- File navigation with nvim-tree
 - Using plugins that are mouse friendly
-- beautiful themes
-- managing tabs , buffers with bufferline
-- autosave
-- icons on nvimtree , telescope , bufferline/statusline and almost everywhere! with nvim-web-devicons
-- minimal status line ( galaxyline)
+- Beautiful themes
+- Manageable tabs and buffers thanks to bufferline
+- Autosave capabilities
+- Sweet icons everywhere thanks to nvim-web-devicons
+- Basic statusline (Lualine)
 - gitsigns (colored bars for git in my config)
-- using nvim-lsp
-- nvim-lspconfig for nvim-lps configuration
+- Native LSP (Language Server Protocol) capabilities thanks to nvim-lsp
+- nvim-lspconfig for nvim-lsp configuration
 - lspInstall for installing lsp servers easily.
 - nvim-compe for autocompletion
 - lspkind to show pictograms on autocompletion items
@@ -119,6 +119,7 @@ without / with Treesitter :
 - indent-blankline.Nvim for indentlines
 - smooth scrolling
 - Snip support from VSCode through vsnip supporting custom and predefined snips (friendly-snippets)
+- Org-mode and Magit capabilities thanks to orgmode.nvim and neogit 
 
 # Requirements
 
