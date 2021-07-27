@@ -1,46 +1,41 @@
-" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
-" unicode characters in the file autoload/float.vim
-" set encoding=utf-8
+-- Some servers have issues with backup files, see #649.
+vim.opt.nobackup = true
+vim.opt.nowritebackup = true
 
-" TextEdit might fail if hidden is not set.
-set hidden
+-- Give more space for displaying messages.
+-- set cmdheight=2
 
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
+-- Don't pass messages to |ins-completion-menu|.
+vim.opt.shortmess = vim.opt.shortmess + 'c'
 
-" Give more space for displaying messages.
-set cmdheight=2
+-- Always show the signcolumn, otherwise it would shift the text each time
+-- diagnostics appear/become resolved.
+vim.opt.signcolumn = "number"
 
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
+-- Use tab for trigger completion with characters ahead and navigate.
+-- NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+-- other plugin before putting this into your config.
+--inoremap <silent><expr> <TAB>
+--      \ pumvisible() ? "\<C-n>" :
+--      \ <SID>check_back_space() ? "\<TAB>" :
+--      \ coc#refresh()
+--inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
+--function! s:check_back_space() abort
+--  let col = col('.') - 1
+--  return !col || getline('.')[col - 1]  =~# '\s'
+--endfunction
 
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+local function t(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
 
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function _G.smart_tab()
+  return vim.fn.pumvisible() == 1 and t'<C-n>' or t'<Tab>'
+end
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.smart_tab()', {expr = true, noremap = true})
+
 
 " Use <c-space> to trigger completion.
 if has('nvim')
