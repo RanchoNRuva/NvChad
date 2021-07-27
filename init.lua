@@ -27,6 +27,11 @@ local neogit = require('neogit')
 
 neogit.setup {}
 
+--local lspConf = require'lspconfig'
+--lspconf.tsserver.setup{}
+--lspconf.html.setup{}
+--lspconf.cssls.setup{}
+--lspconf.jsonls.setup{}
 require'lualine'.setup{
   options = {
     theme  = 'onedark' 
