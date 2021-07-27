@@ -53,26 +53,7 @@ return packer.startup(
             end
         }
 
-        use {
-            "kabouzeid/nvim-lspinstall",
-            event = "BufRead"
-        }
-
-        use {
-            "neovim/nvim-lspconfig",
-            after = "nvim-lspinstall",
-            config = function()
-                require("plugins.lspconfig").config()
-            end
-        }
-
-        use {
-            "onsails/lspkind-nvim",
-            event = "BufRead",
-            config = function()
-                require("lspkind").init()
-            end
-        }
+        use {'neoclide/coc.nvim', branch = 'release'}
 
         -- load compe in insert mode only
         use {
