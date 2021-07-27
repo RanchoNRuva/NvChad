@@ -32,5 +32,3 @@ require'lualine'.setup{
     theme  = 'onedark' 
   }
 }
-
-vim.cmd("source ~/.config/nvim/coc.vim")
